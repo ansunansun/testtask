@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf 8">
+    <title>Test Task</title>
+    <style>
+        .question-list {
+            list-style: none;
+            font-size: large;
+        }
+        .question-list .selected-true:before {
+            content: '(x) ';
+        }
+        .selected-true {
+            background-color: black!important;
+            color: white!important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.6.1/restangular.js"></script>
+</head>
+<body>
+    {% verbatim %}
+    <div class="container" ng-app="myApp" ng-controller="MainCtrl">
+        <div ng-hide="track_started">
+            <h2>Please select questions you want to pass and start</h2>
+            <ul class="question-list" ng-repeat="question in all_questions">
+                <li ng-init="question.selected=false" ng-click="question.selected=question.selected?false:true;" class="question-set selected-{{ question.selected }}">{{ question.text }}</li>
+            </ul>
+            <button type="button" class="btn btn-default" ng-click="track_started=true;show_next_questionset()">Start</button>
+        </div>
+        <div ng-model="tracker" ng-show="track_started">
+            <div ng-repeat="questionset in tracker.question_sets">
+                <h3>{{ questionset.question.text }}</h3>
+                <div class="btn-group" role="group" ng-repeat="option in questionset.question.answers">
+                    <button type="button" class="btn btn-default selected-{{ answer.selected }}" ng-click="answer.selected=true;select_answer($parent.$index, option)" ng-disabled="questionset.choice">{{ option.text }}</button>
+                </div>
+                <h3 ng-show="questionset.choice">{{ questionset.choice.end_message }}</h3>
+            </div>
+            <h3 ng-show="tracker.done">I have no more question</h3>
+        </div>
+    </div>
+    {% endverbatim %}
+<script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>

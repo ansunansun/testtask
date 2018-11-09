@@ -1,0 +1,64 @@
+[
+  {
+    "text": "Are you hungry?",
+    "possible_answers": {
+      "Yes": {
+        "next_question": {
+          "text": "What would you like to eat?",
+          "possible_answers": {
+            "Hamburger": {"end_message": "Nice, I will order a hamburger for you!"},
+            "Pizza": {
+              "next_question": {
+                "text": "Would you like pizza with mushrooms?",
+                 "possible_answers": {
+                   "Yes": {
+                     "end_message": "Ok, I will order the best pizza in town for you"
+                   },
+                   "No": {
+                     "end_message": "No? Well... stay hungry then"
+                   }
+                 }
+              }
+            },
+            "Pop Corn": {"end_message": "Nice, I will order a pop Corn for you!"},
+            "Chicken": {"end_message": "Nice, I will order a chicken for you!"}
+          }
+        }
+      },
+      "No": {
+        "end_message": "Ok. Call me when you're hungry."
+      }
+    }
+  },
+  {
+    "text": "Do you want to go shopping?",
+    "possible_answers": {
+      "Yes": {
+        "next_question": {
+          "text": "Which kind of clothes do you need?",
+          "possible_answers": {
+            "Coat": {"end_message": "Nice, I will order a coat for you!"},
+            "Dress": {
+              "next_question": {
+                "text": "Red is ok for you?",
+                 "possible_answers": {
+                   "Yes": {
+                     "end_message": "Ok, I will order a red dress for you"
+                   },
+                   "No": {
+                     "end_message": "No? Well... then I will order a black dress."
+                   }
+                 }
+              }
+            },
+            "Jean": {"end_message": "Nice, I will order a jean for you!"},
+            "T-Shirts": {"end_message": "Nice, I will order a tshirt for you!"}
+          }
+        }
+      },
+      "No": {
+        "end_message": "Ok. Call me when you want to buy something new"
+      }
+    }
+  }
+]
